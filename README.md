@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/dnkxh6qoqcnxfei5/branch/master?svg=true)](https://ci.appveyor.com/project/riipah/vocadb/branch/master)
+[![Build status](https://github.com/VocaDB/vocadb/actions/workflows/build.yml/badge.svg)](https://github.com/VocaDB/vocadb/actions/workflows/build.yml)
 
 [VocaDB](https://vocadb.net) is a Vocaloid Database with translated artists, albums, music videos and more. Our goal is to be the most accurate and complete source of Vocaloid discography and artists.
 

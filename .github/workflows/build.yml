@@ -1,0 +1,42 @@
+name: Build
+
+on:
+  push:
+    branches-ignore:
+      - l10n_main
+  pull_request:
+    branches-ignore:
+      - l10n_main
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore
+        run: dotnet restore VocaDb.sln
+
+      - name: Build
+        run: dotnet build VocaDb.sln --no-restore --verbosity normal
+
+      - name: Test
+        run: dotnet test VocaDb.sln --no-build --filter "TestCategory!=Database"
